@@ -5,40 +5,35 @@ https://www.hackerrank.com/challenges/nested-list/problem?isFullScreen=true
 Problem: Nested List 
 VVIP
 '''
-
-
-
-
-
-
+#Solution
 if __name__ == '__main__':
     
     #Store name and scores in list
-    arr = []
+    student_grades = []
+    scores = []
     for _ in range(int(input())):
         name = input()
         score = float(input())
-        arr.append([name,score])
-        
-    # Initailaize the lowest and second lowest with maximum grade possible i.e., 100
-    lowest = second_lowest = 100 
-     
-    # store the minimum score in the list
-    for i in range(len(arr)):
-        if arr[i][1]<lowest:
-            lowest = arr[i][1]
-
-    # finding second lowest score
-    for i in range(len(arr)):
-        if arr[i][1] > lowest and arr[i][1] <= second_lowest:
-            second_lowest = arr[i][1]
-            break
-            
-    students = []
-    for i in range(len(arr)):
-        if arr[i][1] == second_lowest:
-           students.append(arr[i][0])
+        student_grades.append([name,score])
+        scores.append(score)
     
+    # find second lowest score    
+    scores.sort()
+        #after sorting we have to get second element of which must be greater than the minimum or we can say greater than the first element after sorting
+    for i in range(len(scores)):
+        if scores[i]<scores[i+1]:
+            second_lowest = scores[i+1]
+            break
+    
+    #storing students with same score as second lowest
+    students = []
+    for i in range(len(student_grades)):
+        if student_grades[i][1] == second_lowest:
+           students.append(student_grades[i][0])
+       
+    # sorting students list
     students.sort()
+    
+    #printing elements of students list
     for i in range(len(students)):
         print(students[i])
